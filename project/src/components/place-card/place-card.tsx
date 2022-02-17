@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 type CardProps = {
   price: number,
   name: string,
@@ -14,9 +16,9 @@ function PlaceCard({price, name, rating, type, premium, image, favorite, cities}
     <article className={`place-card ${cities ? 'cities__place-card' : ''} ${favorite ? 'favorites__card' : ''}`}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`place-card__image-wrapper ${cities ? 'cities__image-wrapper' : ''}${favorite ? 'favorites__image-wrapper' : ''}`}>
-        <a href="#">
+        <Link to="/">
           <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className={`place-card__info ${favorite ? 'favorites__card-info' : ''}`}>
         <div className="place-card__price-wrapper">
@@ -38,7 +40,7 @@ function PlaceCard({price, name, rating, type, premium, image, favorite, cities}
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{name}</a>
+          <Link to="/">{name}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
