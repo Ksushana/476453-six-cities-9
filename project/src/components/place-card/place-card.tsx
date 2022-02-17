@@ -8,12 +8,14 @@ type CardProps = {
   premium: boolean,
   image: string,
   favorite? : boolean,
+  near? : boolean,
   cities? : boolean,
+  addedToFav? : boolean
 }
 
-function PlaceCard({price, name, rating, type, premium, image, favorite, cities}: CardProps ): JSX.Element {
+function PlaceCard({price, name, rating, type, premium, image, favorite, cities, near,addedToFav}: CardProps ): JSX.Element {
   return (
-    <article className={`place-card ${cities ? 'cities__place-card' : ''} ${favorite ? 'favorites__card' : ''}`}>
+    <article className={`place-card ${cities ? 'cities__place-card' : ''} ${favorite ? 'favorites__card' : ''} ${near ? 'near-places__card' : ''}`}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
       <div className={`place-card__image-wrapper ${cities ? 'cities__image-wrapper' : ''}${favorite ? 'favorites__image-wrapper' : ''}`}>
         <Link to="/">
@@ -26,7 +28,7 @@ function PlaceCard({price, name, rating, type, premium, image, favorite, cities}
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button className={`place-card__bookmark-button button ${addedToFav ? 'place-card__bookmark-button--active' : ''}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

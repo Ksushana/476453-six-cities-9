@@ -1,4 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {AppRoute} from '../../const';
 import Layout from '../layout/layout';
 import Main from '../../pages/main-page/main-page';
 import Favorites from '../../pages/favorites/favorites';
@@ -17,9 +18,9 @@ function App({placesToStay}: AppScreenProps): JSX.Element {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Main placesToStay={placesToStay} />} />
-          <Route path='/favorites' element={<PrivateRoute><Favorites /></PrivateRoute>} />
-          <Route path='/login' element={<Login />} />
-          <Route path='offer'>
+          <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites /></PrivateRoute>} />
+          <Route path={AppRoute.Login} element={<Login />} />
+          <Route path={AppRoute.Offer}>
             <Route index element={<Offer />} />
             <Route path=':id' element={<Offer />} />
           </Route>

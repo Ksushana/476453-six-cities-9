@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 import PlaceCard from '../../components/place-card/place-card';
+import Tab from '../../components/tab/tab';
 
 type MainPageProps = {
   placesToStay: number;
@@ -16,34 +16,22 @@ function Main({placesToStay}: MainPageProps): JSX.Element {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item">
-                  <span>Paris</span>
-                </Link>
+                <Tab text='Paris' />
               </li>
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item">
-                  <span>Cologne</span>
-                </Link>
+                <Tab text='Cologne' />
               </li>
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item">
-                  <span>Brussels</span>
-                </Link>
+                <Tab text='Brussels' />
               </li>
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </Link>
+                <Tab text='Amsterdam' isActive />
               </li>
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item">
-                  <span>Hamburg</span>
-                </Link>
+                <Tab text='Hamburg' />
               </li>
               <li className="locations__item">
-                <Link to='/' className="locations__item-link tabs__item">
-                  <span>Dusseldorf</span>
-                </Link>
+                <Tab text='ColDusseldorfogne' />
               </li>
             </ul>
           </section>
@@ -70,10 +58,10 @@ function Main({placesToStay}: MainPageProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 <PlaceCard price={120} name="Beautiful &amp; luxurious apartment at great location" rating="80%" type="Apartment" premium image="img/apartment-01.jpg" cities/>
-                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities/>
+                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities addedToFav/>
                 <PlaceCard price={132} name="Canal View Prinsengracht" rating="80%" type="Apartment" premium={false} image="img/apartment-02.jpg" cities/>
                 <PlaceCard price={180} name="Nice, cozy, warm big bed apartment" rating="100%" type="Apartment" premium image="img/apartment-03.jpg" cities/>
-                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities/>
+                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities addedToFav/>
               </div>
             </section>
             <div className="cities__right-section">
