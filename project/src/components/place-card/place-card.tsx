@@ -1,28 +1,33 @@
 import {Link} from 'react-router-dom';
 
 type CardProps = {
+  id: number,
+  isChosen: boolean,
   price: number,
   name: string,
   rating: string,
   type: string;
   premium: boolean,
   image: string,
-  favorite? : boolean,
-  near? : boolean,
-  cities? : boolean,
-  addedToFav? : boolean
+  cardLook?: string,
+  imageLook?: string,
+  infoLook?: string,
+  addedToFav? : boolean,
+  imageWidth?: number,
+  imageHeight?: number,
+  onMouseEnter: (evt: React.MouseEvent<HTMLElement>) => void,
 }
 
-function PlaceCard({price, name, rating, type, premium, image, favorite, cities, near,addedToFav}: CardProps ): JSX.Element {
+function PlaceCard({id, isChosen, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFav,imageWidth= 200, imageHeight=260, onMouseEnter}: CardProps ): JSX.Element {
   return (
-    <article className={`place-card ${cities ? 'cities__place-card' : ''} ${favorite ? 'favorites__card' : ''} ${near ? 'near-places__card' : ''}`}>
+    <article data-id={id} onMouseEnter={onMouseEnter} className={`place-card ${cardLook} `}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
-      <div className={`place-card__image-wrapper ${cities ? 'cities__image-wrapper' : ''}${favorite ? 'favorites__image-wrapper' : ''}`}>
-        <Link to="/">
-          <img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
+      <div className={`place-card__image-wrapper ${imageLook}`}>
+        <Link to={`/offer/${id}`}>
+          <img className="place-card__image" src={image} width={imageWidth} height={imageHeight} alt="Place image" />
         </Link>
       </div>
-      <div className={`place-card__info ${favorite ? 'favorites__card-info' : ''}`}>
+      <div className={`place-card__info ${infoLook}`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -42,7 +47,7 @@ function PlaceCard({price, name, rating, type, premium, image, favorite, cities,
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="/">{name}</Link>
+          <Link to={`/offer/${id}`}>{name}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

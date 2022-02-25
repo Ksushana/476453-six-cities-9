@@ -6,7 +6,9 @@ export type Offer = {
   title: string;
   type: string;
   isFav: boolean;
-  rating: number;
-  rooms: number;
-  maxPers: number;
+  rating: string;
+  rooms?: number;
+  maxPers?: number;
 };
+
+export type Offers = Offer[];

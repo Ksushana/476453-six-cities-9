@@ -1,14 +1,16 @@
 import Header from '../../components/header/header';
-import PlaceCard from '../../components/place-card/place-card';
+import PlacesList from '../../components/places-list/places-list';
 import Locations from '../../components/locations/locations';
 import Sorting from '../../components/sorting/sorting';
 import Map from '../../components/map/map';
+import {Offer} from '../../types/offer';
 
 type MainPageProps = {
   placesToStay: number;
+  offers: Offer[];
 }
 
-function Main({placesToStay}: MainPageProps): JSX.Element {
+function Main({placesToStay, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -24,11 +26,7 @@ function Main({placesToStay}: MainPageProps): JSX.Element {
               <b className="places__found">{placesToStay} places to stay in Amsterdam</b>
               <Sorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard price={120} name="Beautiful &amp; luxurious apartment at great location" rating="80%" type="Apartment" premium image="img/apartment-01.jpg" cities/>
-                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities addedToFav/>
-                <PlaceCard price={132} name="Canal View Prinsengracht" rating="80%" type="Apartment" premium={false} image="img/apartment-02.jpg" cities/>
-                <PlaceCard price={180} name="Nice, cozy, warm big bed apartment" rating="100%" type="Apartment" premium image="img/apartment-03.jpg" cities/>
-                <PlaceCard price={80} name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" cities addedToFav/>
+                <PlacesList offers={offers} lookView={'cities__place-card'} imageView={'cities__image-wrapper'}/>
               </div>
             </section>
             <div className="cities__right-section">

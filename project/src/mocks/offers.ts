@@ -1,15 +1,15 @@
-import {Offer} from '../types/offer';
+import {Offers} from '../types/offer';
 
-export const offers: Offer[] = [
+export const offers: Offers = [
   {
     id: 1000,
     images: ['img/apartment-01.jpg', 'img/room.jpg', 'img/apartment-03.jpg'],
     premium: true,
     price: 120,
-    title: 'Beautiful &amp; luxurious apartment at great location',
+    title: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     isFav: false,
-    rating: 4,
+    rating: '80%',
     rooms: 2,
     maxPers: 3,
   },
@@ -21,7 +21,7 @@ export const offers: Offer[] = [
     title: 'Wood and stone place',
     type: 'Private room',
     isFav: true,
-    rating: 4,
+    rating: '80%',
     rooms: 2,
     maxPers: 3,
   },
@@ -33,7 +33,7 @@ export const offers: Offer[] = [
     title: 'Canal View Prinsengracht',
     type: 'Apartment',
     isFav: false,
-    rating: 4,
+    rating: '80%',
     rooms: 2,
     maxPers: 3,
   },
@@ -45,7 +45,7 @@ export const offers: Offer[] = [
     title: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     isFav: false,
-    rating: 5,
+    rating: '100%',
     rooms: 2,
     maxPers: 3,
   },
