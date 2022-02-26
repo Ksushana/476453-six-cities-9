@@ -12,13 +12,13 @@ type CardProps = {
   cardLook?: string,
   imageLook?: string,
   infoLook?: string,
-  addedToFav? : boolean,
+  addedToFavorite : boolean,
   imageWidth?: number,
   imageHeight?: number,
   onMouseEnter: (evt: React.MouseEvent<HTMLElement>) => void,
 }
 
-function PlaceCard({id, isChosen, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFav,imageWidth= 200, imageHeight=260, onMouseEnter}: CardProps ): JSX.Element {
+function PlaceCard({id, isChosen, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFavorite = false,imageWidth= 260, imageHeight=200, onMouseEnter}: CardProps ): JSX.Element {
   return (
     <article data-id={id} onMouseEnter={onMouseEnter} className={`place-card ${cardLook} `}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
@@ -33,7 +33,7 @@ function PlaceCard({id, isChosen, cardLook, imageLook, infoLook, price, name, ra
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${addedToFav ? 'place-card__bookmark-button--active' : ''}`} type="button">
+          <button className={`place-card__bookmark-button button ${addedToFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
