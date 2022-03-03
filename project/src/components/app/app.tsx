@@ -8,19 +8,22 @@ import OfferCard from '../../pages/offer/offer';
 import NotFound from '../404/404';
 import PrivateRoute from '../private-route/private-route';
 import {Offers} from '../../types/offer';
+import {City, Points} from '../../types/map';
 
 type AppScreenProps = {
   placesToStay: number;
   offers: Offers;
+  city: City;
+  points: Points;
 }
 
-function App({placesToStay, offers}: AppScreenProps): JSX.Element {
+function App({placesToStay, offers, city, points}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={
-            <Main placesToStay={placesToStay} offers={offers}/>
+            <Main placesToStay={placesToStay} offers={offers} city={city} points={points}/>
           }
           />
           <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites offers={offers}/></PrivateRoute>} />
