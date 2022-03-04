@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import PlacesList from '../../components/places-list/places-list';
+import List from '../../components/list/list';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import {Offer} from '../../types/offer';
@@ -26,7 +26,7 @@ function Favorites({offers}: FavPageProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlacesList offers={offers} lookView={'favorites__card'} imageView={'favorites__image-wrapper'} infoView={'favorites__card-info'} imageWidth={150} imageHeight={110}/>
+                  <List offers={offers} lookView={'favorites__card'} imageView={'favorites__image-wrapper'} infoView={'favorites__card-info'} imageWidth={150} imageHeight={110}/>
                 </div>
               </li>
 
