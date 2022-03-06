@@ -8,7 +8,7 @@ import useMap from '../../hooks/useMap';
 type MapProps = {
   city: City;
   points: Points;
-  selectedPoint: Point | undefined;
+  selectedPoint?: Point | undefined;
 };
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -45,13 +45,11 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points, selectedPoint]);
   return (
-    <section className="cities__map map">
-      <div
-        style={{height: '100%'}}
-        ref={mapRef}
-      >
-      </div>
-    </section>
+    <div
+      style={{height: '100%'}}
+      ref={mapRef}
+    >
+    </div>
   );
 }
 
