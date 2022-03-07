@@ -1,11 +1,15 @@
 import ReviewForm from '../review-form/review-form';
 import ReviewList from '../review-list/review-list';
+import {Review} from '../../../types/review';
 
-function Reviews() : JSX.Element {
+type ReviewsProps = {
+  reviews: Review[],
+};
+
+function Reviews({reviews}: ReviewsProps) : JSX.Element {
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-      <ReviewList />
+      <ReviewList reviews={reviews} />
       <ReviewForm />
     </section>
   );

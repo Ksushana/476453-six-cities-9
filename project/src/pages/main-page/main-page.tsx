@@ -42,7 +42,9 @@ function Main({placesToStay, offers, city, points}: MainPageProps): JSX.Element 
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={points} selectedPoint={selectedPoint} />
+              <section className="cities__map map">
+                <Map city={city} points={points} selectedPoint={selectedPoint} />
+              </section>
             </div>
           </div>
         </div>

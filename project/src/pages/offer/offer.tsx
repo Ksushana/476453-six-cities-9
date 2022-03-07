@@ -8,9 +8,19 @@ import Name from '../../components/property/name/name';
 import Price from '../../components/property/price/price';
 import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
-import Map from '../../components/property/map/map';
+import {Review} from '../../types/review';
+import Map from '../../components/map/map';
+import {Offer} from '../../types/offer';
+import {City, Points} from '../../types/map';
 
-function Property(): JSX.Element {
+type OfferPageProps = {
+  offers: Offer[];
+  reviews: Review[];
+  city: City;
+  points: Points;
+}
+
+function Property({reviews, offers, city, points}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -24,19 +34,21 @@ function Property(): JSX.Element {
               <div className="property__mark">
                 <span>Premium</span>
               </div>
-              <Name />
+              <Name/>
               <Rating />
               <Features />
               <Price />
               <Inside />
               <Host />
-              <Reviews />
+              <Reviews reviews={reviews}/>
             </div>
           </div>
-          <Map />
+          <section className="property__map map" style={{maxWidth: '1144px', margin: '0 auto 50px'}}>
+            <Map city={city} points={points} />
+          </section>
         </section>
         <div className="container">
-          <NearPlaces />
+          <NearPlaces offers={offers} />
         </div>
       </main>
     </div>

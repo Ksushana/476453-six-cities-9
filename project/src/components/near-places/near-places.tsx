@@ -1,13 +1,20 @@
-// import PlaceCard from '../place-card/place-card';
+import PlacesList from '../../components/places-list/places-list';
+import {Offer} from '../../types/offer';
 
-function NearPlaces() :JSX.Element {
+type OfferPageProps = {
+  offers: Offer[];
+}
+
+function NearPlaces({offers}: OfferPageProps) :JSX.Element {
+  const onListItemRender = () => {
+    // eslint-disable-next-line no-console
+    console.log('');
+  };
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {/* <PlaceCard price={80 } name="Wood and stone place" rating="80%" type="Private room" premium={false} image="img/room.jpg" near/>
-        <PlaceCard price={132 } name="Canal View Prinsengracht" rating="80%" type="Apartment" premium={false} image="img/apartment-02.jpg" near/>
-        <PlaceCard price={180 } name="Nice, cozy, warm big bed apartment" rating="100%" type="Apartment" premium image="img/apartment-03.jpg" near/> */}
+        <PlacesList onListItemHover={onListItemRender} offers={offers.slice(0, 3)} lookView={'near-places__card'} imageView={'near-places__image-wrapper'} points={[]}/>
       </div>
     </section>
   );

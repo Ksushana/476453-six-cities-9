@@ -6,3 +6,5 @@ export type Review = {
   photo: string;
   rating: number;
 };
+
+export type Reviews = Review[];
