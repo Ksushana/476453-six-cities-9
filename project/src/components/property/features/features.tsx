@@ -1,14 +1,20 @@
-function Features(): JSX.Element {
+import {Offer} from '../../../types/offer';
+
+type FeaturesProps = {
+  offer: Offer;
+}
+
+function Features({offer}: FeaturesProps): JSX.Element {
   return (
     <ul className="property__features">
       <li className="property__feature property__feature--entire">
-        Apartment
+        {offer.type}
       </li>
       <li className="property__feature property__feature--bedrooms">
-        3 Bedrooms
+        {offer.bedrooms} Bedrooms
       </li>
       <li className="property__feature property__feature--adults">
-        Max 4 adults
+        Max {offer.maxAdults} adults
       </li>
     </ul>
   );

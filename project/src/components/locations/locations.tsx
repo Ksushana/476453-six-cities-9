@@ -1,27 +1,28 @@
-import Tab from '../../components/tab/tab';
+import { useAppDispatch } from '../../hooks/useState';
+import { setCity } from '../../store/action';
+import { mainLocations } from '../../const';
+import {Link} from 'react-router-dom';
 
-function Locations(): JSX.Element {
+function Locations(props: { city: string }): JSX.Element {
+  const { city } = props;
+  const dispatch = useAppDispatch();
+
+  function handleLocationClick(mainLocation: string) {
+    return () => dispatch(setCity(mainLocation));
+  }
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        <li className="locations__item">
-          <Tab text='Paris' />
-        </li>
-        <li className="locations__item">
-          <Tab text='Cologne' />
-        </li>
-        <li className="locations__item">
-          <Tab text='Brussels' />
-        </li>
-        <li className="locations__item">
-          <Tab text='Amsterdam' isActive />
-        </li>
-        <li className="locations__item">
-          <Tab text='Hamburg' />
-        </li>
-        <li className="locations__item">
-          <Tab text='ColDusseldorfogne' />
-        </li>
+        {mainLocations.map((mainLocation) => {
+          const isActive = `locations__item-link tabs__item ${mainLocation === city && ' tabs__item--active'}`;
+          return (
+            <li key={mainLocation} className="locations__item" onClick={handleLocationClick(mainLocation)}>
+              <Link to='/' className={isActive}>
+                <span>{mainLocation}</span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

@@ -1,11 +1,17 @@
-function Rating() : JSX.Element {
+import {Offer} from '../../../types/offer';
+
+type RatingProps = {
+  offer: Offer;
+}
+
+function Rating({offer}: RatingProps) : JSX.Element {
   return (
     <div className="property__rating rating">
       <div className="property__stars rating__stars">
         <span style={{width : '80%'}}></span>
         <span className="visually-hidden">Rating</span>
       </div>
-      <span className="property__rating-value rating__value">4.8</span>
+      <span className="property__rating-value rating__value">{offer.rating}</span>
     </div>
   );
 }

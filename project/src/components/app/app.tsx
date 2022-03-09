@@ -4,35 +4,32 @@ import Layout from '../layout/layout';
 import Main from '../../pages/main-page/main-page';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
-import OfferCard from '../../pages/offer/offer';
+// import OfferCard from '../../pages/offer/offer';
 import NotFound from '../404/404';
 import PrivateRoute from '../private-route/private-route';
-import {Offers} from '../../types/offer';
 import {Reviews} from '../../types/review';
-import {City, Points} from '../../types/map';
+import { useAppSelector } from '../../hooks/useState';
 
 type AppScreenProps = {
   placesToStay: number;
-  offers: Offers;
   reviews: Reviews;
-  city: City;
-  points: Points;
 }
 
-function App({placesToStay, offers, city, points, reviews}: AppScreenProps): JSX.Element {
+function App({placesToStay, reviews}: AppScreenProps): JSX.Element {
+  const { location, offers } = useAppSelector((state) => state);
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={
-            <Main placesToStay={placesToStay} offers={offers} city={city} points={points}/>
+            <Main offers={offers} city={location}/>
           }
           />
           <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites offers={offers}/></PrivateRoute>} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Offer}>
-            <Route index element={<OfferCard reviews={reviews}  city={city} points={points} offers={offers}/>} />
-            <Route path=':id' element={<OfferCard reviews={reviews}  city={city} points={points} offers={offers}/>} />
+            {/* <Route index element={<OfferCard reviews={reviews}  offers={offers}/>} /> */}
+            {/* <Route path=':id' element={<OfferCard reviews={reviews}  offers={offers}/>} /> */}
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -1,9 +1,8 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import {CITY} from './mocks/city';
-import {POINTS} from './mocks/points';
-import {offers} from './mocks/offers';
+import store from './store';
 import {REVIEWS} from './mocks/reviews';
 
 const Setting = {
@@ -12,12 +11,11 @@ const Setting = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      placesToStay = {Setting.PLACES_TO_STAY}
-      offers = {offers}
-      points={POINTS}
-      city={CITY}
-      reviews={REVIEWS}
-    />
+    <Provider store={store}>
+      <App
+        placesToStay = {Setting.PLACES_TO_STAY}
+        reviews={REVIEWS}
+      />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
