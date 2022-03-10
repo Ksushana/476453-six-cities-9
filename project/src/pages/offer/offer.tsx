@@ -10,22 +10,22 @@ import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
 import {Review} from '../../types/review';
 import Map from '../../components/map/map';
-import {Offer, Location} from '../../types/offer';
-// import {City, Points} from '../../types/map';
+import {Offer} from '../../types/offer';
 import { useParams } from 'react-router-dom';
 
 type OfferPageProps = {
   offers: Offer[];
-  cityLocation: Location,
   reviews: Review[];
-  points: { id: number, location: Location }[],
-  selectedPoint: number | null,
 }
 
-function Property({reviews, offers, cityLocation, points, selectedPoint}: OfferPageProps): JSX.Element {
-  const {id} = useParams();
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const offerItem = offers.find((o) => o.id === Number(id))!;
+function Property({reviews, offers}: OfferPageProps): JSX.Element {
+  const URLid = useParams().id;
+  const offerItem = offers.find((o) => o.id === Number(URLid));
+  if (!offerItem) {
+    return (<div>ooops</div>);
+  }
+  const cityLocation = offerItem.city.location;
+  const points = offers.map(({ id, location }) => ({ id, location }));
   return (
     <div className="page">
       <Header />
@@ -41,13 +41,13 @@ function Property({reviews, offers, cityLocation, points, selectedPoint}: OfferP
               <Rating offer={offerItem}/>
               <Features offer={offerItem}/>
               <Price  offer={offerItem}/>
-              <Inside />
-              <Host />
+              <Inside  offer={offerItem}/>
+              <Host offer={offerItem}/>
               <Reviews reviews={reviews}/>
             </div>
           </div>
           <section className="property__map map" style={{maxWidth: '1144px', margin: '0 auto 50px'}}>
-            <Map points={points} city={cityLocation} selectedPoint={selectedPoint}/>
+            <Map points={points} city={cityLocation} selectedPoint={offerItem.id}/>
           </section>
         </section>
         <div className="container">

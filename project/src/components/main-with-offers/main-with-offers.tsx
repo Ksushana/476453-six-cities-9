@@ -6,13 +6,13 @@ import {Offer, Location} from '../../types/offer';
 
 type MainPageProps = {
   offers: Offer[];
-  cityLocation: Location,
+  city: Location,
   points: { id: number, location: Location }[],
   selectedPoint: number | null,
   setSelectedPoint: (x: number | null) => void,
 }
 
-function MainPageOffers({offers, cityLocation, points, selectedPoint, setSelectedPoint } : MainPageProps): JSX.Element {
+function MainPageOffers({offers, city, points, selectedPoint, setSelectedPoint } : MainPageProps): JSX.Element {
   const activeCity = useAppSelector((state) => state.location);
   return (
     <div className="cities__places-container container">
@@ -26,7 +26,7 @@ function MainPageOffers({offers, cityLocation, points, selectedPoint, setSelecte
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          <Map points={points} city={cityLocation} selectedPoint={selectedPoint}/>
+          <Map points={points} city={city} selectedPoint={selectedPoint}/>
         </section>
       </div>
     </div>

@@ -6,8 +6,6 @@ type GalleryProps = {
 
 
 function Gallery({offer} : GalleryProps) :JSX.Element {
-  // eslint-disable-next-line no-console
-  console.log(offer.images);
   return (
     <div className="property__gallery">
       <div className="property__image-wrapper">

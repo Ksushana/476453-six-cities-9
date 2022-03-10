@@ -3,13 +3,11 @@ import Header from '../../components/header/header';
 import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
 import MainPageOffers from '../../components/main-with-offers/main-with-offers';
 import Locations from '../../components/locations/locations';
-
 import {Offer} from '../../types/offer';
-// import { Points, Point} from '../../types/map';
 
 type MainPageProps = {
   offers: Offer[];
-  city: string
+  city: string,
 }
 
 function Main({offers, city}: MainPageProps): JSX.Element {
@@ -29,7 +27,7 @@ function Main({offers, city}: MainPageProps): JSX.Element {
         <div className="cities">
           {isListEmpty
             ? <MainPageEmpty />
-            : <MainPageOffers points={points} offers={sortedOffers} setSelectedPoint={setSelectedPoint} cityLocation={cityLocation} selectedPoint={selectedPoint}/>};
+            : <MainPageOffers points={points} offers={sortedOffers} setSelectedPoint={setSelectedPoint} city={cityLocation} selectedPoint={selectedPoint}/>};
         </div>
       </main>
     </div>
