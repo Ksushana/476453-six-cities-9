@@ -1,14 +1,10 @@
+import { Offer } from './offer';
+
 export type City = {
   title: string;
-  lat: number;
-  lng: number;
-  zoom: number;
+  offers: Offer,
 };
 
-export type Point = {
-  id: number;
-  lat: number;
-  lng: number;
-};
+export type Point = Pick<Offer, 'id' | 'location'>;
 
 export type Points = Point[];

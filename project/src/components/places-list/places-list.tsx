@@ -24,7 +24,7 @@ function PlacesList({offers, lookView, imageView, infoView, imageWidth, imageHei
   }
   return (
     <>
-      {offers.map((offer) => <PlaceCard key={offer.id} id={offer.id} isChosen={offer.id === chosenOffer} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.premium} image={offer.images[0]} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth} onMouseEnter={onCardMouseEnter} addedToFavorite={false}/>)}
+      {offers.map((offer) => <PlaceCard key={offer.id} id={offer.id} isChosen={offer.id === chosenOffer} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.isPremium} image={offer.previewImage} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth} onMouseEnter={onCardMouseEnter} addedToFavorite={false}/>)}
     </>
   );
 }
