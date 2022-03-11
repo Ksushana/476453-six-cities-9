@@ -22,10 +22,8 @@ function Property({reviews, offers}: OfferPageProps): JSX.Element {
   const URLid = useParams().id;
   const offerItem = offers.find((o) => o.id === Number(URLid));
   if (!offerItem) {
-    return (<div>ooops</div>);
+    return (<div>Oooops!</div>);
   }
-  const cityLocation = offerItem.city.location;
-  const points = offers.map(({ id, location }) => ({ id, location }));
   return (
     <div className="page">
       <Header />
@@ -47,7 +45,7 @@ function Property({reviews, offers}: OfferPageProps): JSX.Element {
             </div>
           </div>
           <section className="property__map map" style={{maxWidth: '1144px', margin: '0 auto 50px'}}>
-            <Map points={points} city={cityLocation} selectedPoint={offerItem.id}/>
+            <Map cityOffers={offers} selectedOffer={offerItem}/>
           </section>
         </section>
         <div className="container">

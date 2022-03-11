@@ -15,13 +15,13 @@ type AppScreenProps = {
 }
 
 function App({reviews}: AppScreenProps): JSX.Element {
-  const { location, offers } = useAppSelector((state) => state);
+  const {  offers } = useAppSelector((state) => state);
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={
-            <Main offers={offers} city={location}/>
+            <Main/>
           }
           />
           <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites offers={offers}/></PrivateRoute>} />

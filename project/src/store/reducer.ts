@@ -4,14 +4,14 @@ import { setCity, setOffers } from './action';
 import { AppState } from '../types/state';
 
 const initialState: AppState = {
-  location: 'Paris',
+  city: 'Paris',
   offers: offers,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCity, (state, action) => {
-      state.location = action.payload;
+      state.city = action.payload;
     })
     .addCase(setOffers, (state, action) => {
       state.offers = action.payload;

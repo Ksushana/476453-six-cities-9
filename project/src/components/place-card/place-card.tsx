@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
+import { Offer } from '../../types/offer';
 
 type CardProps = {
+  offer: Offer,
   id: number,
-  isChosen: boolean,
   price: number,
   name: string,
   rating: number,
@@ -15,10 +16,14 @@ type CardProps = {
   addedToFavorite : boolean,
   imageWidth?: number,
   imageHeight?: number,
-  onMouseEnter: (evt: React.MouseEvent<HTMLElement>) => void,
+  onSelected: (offer: Offer) => void,
 }
 
-function PlaceCard({id, isChosen, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFavorite = false,imageWidth= 260, imageHeight=200, onMouseEnter}: CardProps ): JSX.Element {
+function PlaceCard({id, offer, onSelected, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFavorite = false,imageWidth= 260, imageHeight=200}: CardProps ): JSX.Element {
+  const onMouseEnter = () => {
+    onSelected(offer);
+  } ;
+
   return (
     <article data-id={id} onMouseEnter={onMouseEnter} className={`place-card ${cardLook} `}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}

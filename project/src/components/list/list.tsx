@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import PlaceCard from '../place-card/place-card';
 import {Offer} from '../../types/offer';
 
@@ -9,17 +8,16 @@ type PlacesToStayProps = {
   infoView?: string;
   imageWidth?: number;
   imageHeight?: number;
+  onSelected: (offer: Offer) => void,
 };
 
-function List({offers, lookView, imageView, infoView, imageWidth, imageHeight}: PlacesToStayProps): JSX.Element {  const [chosenOffer, setChosenOffer] = useState(0);
-  function onCardMouseEnter(evt: React.MouseEvent<HTMLElement>) {
-    if (evt.currentTarget instanceof HTMLElement) {
-      setChosenOffer(Number(evt.currentTarget.dataset.id));
-    }
-  }
+function List({onSelected, offers, lookView, imageView, infoView, imageWidth, imageHeight}: PlacesToStayProps): JSX.Element {
+  const handlePlaceSelected = (offer: Offer) => {
+    onSelected(offer);
+  };
   return (
     <>
-      {offers.map((offer) => <PlaceCard key={offer.id} id={offer.id} isChosen={offer.id === chosenOffer} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.isPremium} image={offer.images[0]} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth} onMouseEnter={onCardMouseEnter} addedToFavorite={false}/>)}
+      {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} id={offer.id} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.isPremium} image={offer.previewImage} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth} onSelected={handlePlaceSelected} addedToFavorite={false}/>)}
     </>
   );
 }
