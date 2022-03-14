@@ -2,13 +2,12 @@ import {Link} from 'react-router-dom';
 // import List from '../../components/list/list';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {Offer} from '../../types/offer';
+// import { useAppSelector } from '../../hooks/useState';
+// import {Offer} from '../../types/offer';
 
-type FavPageProps = {
-  offers: Offer[];
-}
 
-function Favorites({offers}: FavPageProps): JSX.Element {
+function Favorites(): JSX.Element {
+  // const { offers } = useAppSelector((state) => state);
   return (
     <div className="page">
       <Header />

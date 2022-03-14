@@ -8,14 +8,26 @@ import OfferCard from '../../pages/offer/offer';
 import NotFound from '../404/404';
 import PrivateRoute from '../private-route/private-route';
 import {Reviews} from '../../types/review';
-import { useAppSelector } from '../../hooks/useState';
+import { useAppDispatch } from '../../hooks/useState';
+import { useEffect } from 'react';
+import { setOffers } from '../../store/action';
 
 type AppScreenProps = {
   reviews: Reviews;
 }
 
 function App({reviews}: AppScreenProps): JSX.Element {
-  const {  offers } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch((nextDispatch, getState, api) => {
+      api.get('/hotels')
+        .then((response) => {
+          nextDispatch(setOffers(response.data));
+        });
+    });
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -24,11 +36,16 @@ function App({reviews}: AppScreenProps): JSX.Element {
             <Main/>
           }
           />
-          <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites offers={offers}/></PrivateRoute>} />
+          <Route path={AppRoute.Favorites} element={
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          }
+          />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Offer}>
-            <Route index element={<OfferCard reviews={reviews}  offers={offers}/>} />
-            <Route path=':id' element={<OfferCard reviews={reviews}  offers={offers}/>} />
+            <Route index element={<OfferCard reviews={reviews} />} />
+            <Route path=':id' element={<OfferCard reviews={reviews} />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import {OffersSortingType} from '../../types/offer';
 
 type MainPageProps = {
-  offers: Offer[];
   activeCity: string;
+  offers: Offer[];
 }
 
 function getCompareFunction(type: OffersSortingType): (a: Offer, b: Offer) => number {
@@ -35,14 +35,14 @@ function getCompareFunction(type: OffersSortingType): (a: Offer, b: Offer) => nu
   return mapping[type];
 }
 
-function MainPageOffers({offers, activeCity} : MainPageProps): JSX.Element {
+function MainPageOffers({ offers, activeCity} : MainPageProps): JSX.Element {
   const [sortingType, setSortingType] = useState<OffersSortingType>('none');
 
   const sortedOffers = [...offers].sort(getCompareFunction(sortingType));
   const [chosenOffer, setChosenOffer] = useState(offers[0]);
   useEffect(( )=> {
     setChosenOffer(offers[0]);
-  },[offers]);
+  }, [offers]);
 
   return (
     <div className="cities__places-container container">

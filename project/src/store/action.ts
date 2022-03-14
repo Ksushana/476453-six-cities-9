@@ -6,3 +6,5 @@ export const setCity = createAction<string>('main/setCity');
 export const setOffers = createAction<Offers>('main/setOffers');
 
 export const setCurrentOffer = createAction<Offer>('main/setCurrentOffer');
+
+

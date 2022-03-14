@@ -10,15 +10,15 @@ import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
 import {Review} from '../../types/review';
 import Map from '../../components/map/map';
-import {Offer} from '../../types/offer';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/useState';
 
 type OfferPageProps = {
-  offers: Offer[];
   reviews: Review[];
 }
 
-function Property({reviews, offers}: OfferPageProps): JSX.Element {
+function Property({reviews}: OfferPageProps): JSX.Element {
+  const { offers } = useAppSelector((state) => state);
   const URLid = useParams().id;
   const offerItem = offers.find((o) => o.id === Number(URLid));
   if (!offerItem) {

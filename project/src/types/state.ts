@@ -1,4 +1,4 @@
-import { Offer, Offers } from './offer';
+import {Offer, Offers } from './offer';
 import store from '../store';
 
 export type AppState = {
