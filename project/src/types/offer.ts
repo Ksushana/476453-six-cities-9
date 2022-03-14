@@ -35,4 +35,6 @@ export type Offer = {
   type: string
 };
 
+export type OffersSortingType = 'none' | 'byPriceUp' | 'byPriceDown' | 'byRatingDown';
+
 export type Offers = Offer[];

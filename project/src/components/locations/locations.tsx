@@ -8,7 +8,9 @@ function Locations(): JSX.Element {
   const dispatch = useAppDispatch();
 
   function handleLocationClick(mainLocation: string) {
-    return () => dispatch(setCity(mainLocation));
+    return () => {
+      dispatch(setCity(mainLocation));
+    };
   }
   return (
     <section className="locations container">

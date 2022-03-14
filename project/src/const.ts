@@ -1,3 +1,5 @@
+import { OffersSortingType } from './types/offer';
+
 export enum AppRoute {
   Login = '/login',
   Root = '/',
@@ -15,3 +17,4 @@ export const mainLocations = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamb
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_STARS_RATING = 5;
 
+export const offersSortingVariants: OffersSortingType[] = ['none', 'byPriceUp', 'byPriceDown', 'byRatingDown'];

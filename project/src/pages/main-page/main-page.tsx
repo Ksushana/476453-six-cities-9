@@ -21,7 +21,7 @@ function Main(): JSX.Element {
         <div className="cities">
           {isListEmpty
             ? <MainPageEmpty />
-            : <MainPageOffers offers={cityOffers}/>};
+            : <MainPageOffers offers={cityOffers} activeCity={city}/>};
         </div>
       </main>
     </div>

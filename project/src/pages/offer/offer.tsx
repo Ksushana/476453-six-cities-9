@@ -45,7 +45,7 @@ function Property({reviews, offers}: OfferPageProps): JSX.Element {
             </div>
           </div>
           <section className="property__map map" style={{maxWidth: '1144px', margin: '0 auto 50px'}}>
-            <Map cityOffers={offers} selectedOffer={offerItem}/>
+            <Map cityOffers={offers} selectedOffer={offerItem} type="offer"/>
           </section>
         </section>
         <div className="container">

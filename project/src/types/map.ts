@@ -5,6 +5,8 @@ export type City = {
   offers: Offer,
 };
 
+export type MapType = 'main' | 'offer';
+
 export type Point = Pick<Offer, 'id' | 'location'>;
 
 export type Points = Point[];
