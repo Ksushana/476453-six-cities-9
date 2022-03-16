@@ -8,25 +8,34 @@ import OfferCard from '../../pages/offer/offer';
 import NotFound from '../404/404';
 import PrivateRoute from '../private-route/private-route';
 import {Reviews} from '../../types/review';
-import { useAppDispatch } from '../../hooks/useState';
-import { useEffect } from 'react';
-import { setOffers } from '../../store/action';
+import {useAppSelector} from './../../hooks/useState';
+// import { useAppDispatch, useAppSelector } from '../../hooks/useState';
+// import { useEffect } from 'react';
+// import { setOffers } from '../../store/action';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { isCheckedAuth } from '../header/header';
 
 type AppScreenProps = {
   reviews: Reviews;
 }
 
 function App({reviews}: AppScreenProps): JSX.Element {
-  const dispatch = useAppDispatch();
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch((nextDispatch, getState, api) => {
-      api.get('/hotels')
-        .then((response) => {
-          nextDispatch(setOffers(response.data));
-        });
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch((nextDispatch, getState, api) => {
+  //     api.get('/hotels')
+  //       .then((response) => {
+  //         nextDispatch(setOffers(response.data));
+  //       });
+  //   });
+  // }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -37,7 +46,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
           }
           />
           <Route path={AppRoute.Favorites} element={
-            <PrivateRoute>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <Favorites />
             </PrivateRoute>
           }

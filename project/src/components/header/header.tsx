@@ -1,5 +1,9 @@
 import {Link} from 'react-router-dom';
 import Logo from './../logo/logo';
+import { AuthorizationStatus} from './../../const';
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
 
 function Header(): JSX.Element {
   return (
