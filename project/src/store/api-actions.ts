@@ -10,7 +10,7 @@ import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'main/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError('')),
@@ -21,10 +21,14 @@ export const clearErrorAction = createAsyncThunk(
 
 
 export const fetchOffersAction = createAsyncThunk(
-  'data/fetchQuestions',
+  'data/fetchOffers',
   async () => {
-    const {data} = await api.get<Offers>(APIRoute.Offers);
-    store.dispatch(setOffers(data));
+    try {
+      const {data} = await api.get<Offers>(APIRoute.Offers);
+      store.dispatch(setOffers(data));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );
 

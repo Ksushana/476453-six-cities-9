@@ -1,11 +1,11 @@
-import {Link} from 'react-router-dom';
+import UserNavigation from '../user-navigation/user-navigation';
 import Logo from './../logo/logo';
-import { AuthorizationStatus} from './../../const';
 
-export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
-  authorizationStatus === AuthorizationStatus.Unknown;
+type HeaderProps = {
+  hideNavigation?: boolean;
+}
 
-function Header(): JSX.Element {
+function Header({hideNavigation = false} :HeaderProps = {}): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -13,22 +13,7 @@ function Header(): JSX.Element {
           <div className="header__left">
             <Logo width={81} height={61}/>
           </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link to="/" className="header__nav-link header__nav-link--profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <Link to="/" className="header__nav-link">
-                  <span className="header__signout">Sign out</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          {!hideNavigation && <UserNavigation/> }
         </div>
       </div>
     </header>

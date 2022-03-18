@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import Layout from '../layout/layout';
 import Main from '../../pages/main-page/main-page';
 import Favorites from '../../pages/favorites/favorites';
@@ -8,34 +8,24 @@ import OfferCard from '../../pages/offer/offer';
 import NotFound from '../404/404';
 import PrivateRoute from '../private-route/private-route';
 import {Reviews} from '../../types/review';
-import {useAppSelector} from './../../hooks/useState';
-// import { useAppDispatch, useAppSelector } from '../../hooks/useState';
-// import { useEffect } from 'react';
-// import { setOffers } from '../../store/action';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { isCheckedAuth } from '../header/header';
+import { useAppSelector } from '../../hooks/useState';
 
 type AppScreenProps = {
   reviews: Reviews;
 }
 
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
+
 function App({reviews}: AppScreenProps): JSX.Element {
+
   const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingScreen />
     );
   }
-  // const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch((nextDispatch, getState, api) => {
-  //     api.get('/hotels')
-  //       .then((response) => {
-  //         nextDispatch(setOffers(response.data));
-  //       });
-  //   });
-  // }, [dispatch]);
 
   return (
     <BrowserRouter>
