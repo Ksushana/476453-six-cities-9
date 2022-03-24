@@ -11,7 +11,6 @@ type ReviewFormProps = {
 function ReviewForm({hotelID}: ReviewFormProps) : JSX.Element {
 
   const textRef = useRef<HTMLTextAreaElement | null>(null);
-  // const ratingRef = useRef<HTMLInputElement | null>(null);
 
   const [formComment, setFormComment] = useState('');
   const [rating, setRating] = useState(0);
@@ -47,7 +46,7 @@ function ReviewForm({hotelID}: ReviewFormProps) : JSX.Element {
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <ReviewFormRating onChange={ratingChangeHandle}/>
-      <textarea ref={textRef} onChange={fieldChangeHandle} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea ref={textRef} onChange={fieldChangeHandle} maxLength={300} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
