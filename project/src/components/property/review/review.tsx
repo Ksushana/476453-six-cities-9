@@ -1,5 +1,6 @@
+import dayjs from 'dayjs';
+
 type ReviewProps = {
-  id: number;
   text: string;
   date: string;
   name: string;
@@ -7,7 +8,9 @@ type ReviewProps = {
   rating: number;
 }
 
-function Review({id, text, date, name, photo, rating}:ReviewProps ) :JSX.Element {
+function Review({ text, date, name, photo, rating}:ReviewProps ) :JSX.Element {
+  const reviewDate = dayjs(date);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -28,7 +31,7 @@ function Review({id, text, date, name, photo, rating}:ReviewProps ) :JSX.Element
         <p className="reviews__text">
           {text}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
+        <time className="reviews__time" dateTime={reviewDate.format('YYYY-MM-DD')}>{reviewDate.format('YYYY-MM-DD')}</time>
       </div>
     </li>
   );

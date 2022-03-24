@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser } from './action';
+import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser, setRoomOffers, setRoomComments, fetchOfferById } from './action';
 import { AppState } from '../types/state';
-import {AuthorizationStatus} from '../const';
+import { AuthorizationStatus } from '../const';
 
 const initialState: AppState = {
   city: 'Paris',
@@ -10,7 +10,10 @@ const initialState: AppState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   error: '',
   isDataLoaded: false,
-  user: '',
+  user: 'eee',
+  offersNearby: [],
+  comments: [],
+  offer: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -33,7 +36,19 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(fetchOfferById, (state, action) => {
+      state.offer = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(setRoomOffers, (state, action) => {
+      state.offersNearby = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(setRoomComments, (state, action) => {
+      state.comments = action.payload;
+      state.isDataLoaded = true;
     });
 });
 
-export {reducer};
+export default reducer;

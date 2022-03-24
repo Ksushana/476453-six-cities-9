@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { Offers, Offer } from '../types/offer';
+import { Offers, Offer, Comments } from '../types/offer';
 import {AppRoute, AuthorizationStatus} from '../const';
 
 export const setCity = createAction<string>('main/setCity');
@@ -16,3 +16,8 @@ export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
 
 export const setUser = createAction<string>('main/setUser');
 
+export const fetchOfferById = createAction<Offer>('offer/fetchOfferById');
+
+export const setRoomOffers = createAction<Offers>('offer/setRoomOffers');
+
+export const setRoomComments = createAction<Comments>('offer/setRoomComments');

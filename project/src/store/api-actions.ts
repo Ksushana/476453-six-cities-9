@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import { requireAuthorization, setOffers, setError } from './action';
+import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute } from './action';
 import {errorHandle} from '../services/error-handle';
-import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import { Offers } from '../types/offer';
+import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import { AddComment, Comments, Offer, Offers } from '../types/offer';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
@@ -16,19 +16,6 @@ export const clearErrorAction = createAsyncThunk(
       () => store.dispatch(setError('')),
       TIMEOUT_SHOW_ERROR,
     );
-  },
-);
-
-
-export const fetchOffersAction = createAsyncThunk(
-  'data/fetchOffers',
-  async () => {
-    try {
-      const {data} = await api.get<Offers>(APIRoute.Offers);
-      store.dispatch(setOffers(data));
-    } catch (error) {
-      errorHandle(error);
-    }
   },
 );
 
@@ -52,6 +39,7 @@ export const loginAction = createAsyncThunk(
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -69,6 +57,67 @@ export const logoutAction = createAsyncThunk(
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
+export const fetchOffersAction = createAsyncThunk(
+  'data/fetchOffers',
+  async () => {
+    try {
+      const {data} = await api.get<Offers>(APIRoute.Offers);
+      store.dispatch(setOffers(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchOfferByIdAction = createAsyncThunk(
+  'offer/fetchOfferById',
+  async (hotelId: string) => {
+    try {
+      const {data} = await api.get<Offer>(`${APIRoute.Offer}/${hotelId}`);
+      store.dispatch(fetchOfferById(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk(
+  'offer/setRoomComments',
+  async (hotelID: string) => {
+    try {
+      const {data} = await api.get<Comments>(`${APIRoute.Comments}/${hotelID}`);
+      store.dispatch(setRoomComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchNearbyOffersAction = createAsyncThunk(
+  'offer/setRoomOffers',
+  async (hotelID: string) => {
+    try {
+      const {data} = await api.get<Offers>(`${APIRoute.Offers}/${hotelID}/nearby`);
+      store.dispatch(setRoomOffers(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const addCommentAction = createAsyncThunk(
+  'offer/addComment',
+  async ({hotelID, commentData}: AddComment) => {
+    try {
+      const {comment, rating} = commentData;
+      const {data} = await api.post<Comments>(`${APIRoute.Comments}/${hotelID}`, {comment, rating});
+      store.dispatch(setRoomComments(data));
+    } catch (error) {
+      errorHandle(error);
     }
   },
 );

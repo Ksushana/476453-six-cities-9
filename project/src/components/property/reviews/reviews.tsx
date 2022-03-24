@@ -1,16 +1,19 @@
 import ReviewForm from '../review-form/review-form';
 import ReviewList from '../review-list/review-list';
-import {Review} from '../../../types/review';
+import { useAppSelector } from '../../../hooks/useState';
+import { AuthorizationStatus } from '../../../const';
 
-type ReviewsProps = {
-  reviews: Review[],
-};
+type ReviewFormProps = {
+  hotelID: number;
+}
 
-function Reviews({reviews}: ReviewsProps) : JSX.Element {
+function Reviews({hotelID}: ReviewFormProps) : JSX.Element {
+  const {authorizationStatus} = useAppSelector((state) => state);
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   return (
     <section className="property__reviews reviews">
-      <ReviewList reviews={reviews} />
-      <ReviewForm />
+      <ReviewList/>
+      {isAuthorized && <ReviewForm hotelID={hotelID} /> }
     </section>
   );
 }

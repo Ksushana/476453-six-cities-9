@@ -3,8 +3,8 @@ import {Offer} from '../../types/offer';
 
 type PlacesToStayProps = {
   offers: Offer[],
-  lookView?: string;
-  imageView?: string;
+  lookView: string;
+  imageView: string;
   infoView?: string;
   imageWidth?: number;
   imageHeight?: number;

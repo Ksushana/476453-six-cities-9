@@ -4,7 +4,8 @@ export enum AppRoute {
   Login = '/login',
   Root = '/',
   Favorites = '/favorites',
-  Offer = '/offer'
+  Offer = '/offer',
+  NotFound = '/404'
 }
 
 export const TIMEOUT_SHOW_ERROR = 3000;
@@ -29,8 +30,11 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Offers = '/hotels',
+  Offer = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
+  Favorites = '/favorite',
 }
 
 export enum HTTP_CODE {

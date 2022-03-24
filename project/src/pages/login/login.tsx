@@ -2,10 +2,10 @@ import {Link, useNavigate} from 'react-router-dom';
 import Header from '../../components/header/header';
 import {useRef, FormEvent} from 'react';
 import {loginAction} from '../../store/api-actions';
-import {AuthData} from '../../types/auth-data';
 import { useAppDispatch } from '../../hooks/useState';
 import { AppRoute } from '../../const';
 import { setUser } from '../../store/action';
+import { AuthData } from '../../types/auth-data';
 
 function Login(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);

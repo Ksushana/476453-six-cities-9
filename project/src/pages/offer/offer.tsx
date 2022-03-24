@@ -8,52 +8,59 @@ import Name from '../../components/property/name/name';
 import Price from '../../components/property/price/price';
 import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
-import {Review} from '../../types/review';
 import Map from '../../components/map/map';
-import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useState';
+import NotFound from '../../components/404/404';
+import { useEffect } from 'react';
+import { store } from '../../store';
+import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
 
-type OfferPageProps = {
-  reviews: Review[];
-}
+function Property(): JSX.Element {
+  const { offersNearby, offer } = useAppSelector((state) => state);
+  const URLid = useParams().id || '';
 
-function Property({reviews}: OfferPageProps): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
-  const URLid = useParams().id;
-  const offerItem = offers.find((o) => o.id === Number(URLid));
-  if (!offerItem) {
-    return (<div>Oooops!</div>);
+  useEffect(( )=> {
+    store.dispatch(fetchOfferByIdAction(URLid));
+    store.dispatch(fetchCommentsAction(URLid));
+    store.dispatch(fetchNearbyOffersAction(URLid));
+  }, [URLid]);
+
+  if (!offer) {
+    return (<NotFound />);
   }
+
+  const offersNearbyWithCurrent = [...offersNearby, offer ];
+
   return (
     <div className="page">
       <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <Gallery  offer={offerItem}/>
+            <Gallery  offer={offer}/>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offerItem.isPremium ? <div className="property__mark"><span>Premium</span></div> : ''}
-              <Name offer={offerItem}/>
-              <Rating offer={offerItem}/>
-              <Features offer={offerItem}/>
-              <Price  offer={offerItem}/>
-              <Inside  offer={offerItem}/>
-              <Host offer={offerItem}/>
-              <Reviews reviews={reviews}/>
+              {offer.isPremium ? <div className="property__mark"><span>Premium</span></div> : ''}
+              <Name offer={offer}/>
+              <Rating offer={offer}/>
+              <Features offer={offer}/>
+              <Price  offer={offer}/>
+              <Inside  offer={offer}/>
+              <Host offer={offer}/>
+              <Reviews hotelID={offer.id}/>
             </div>
           </div>
           <section className="property__map map" style={{maxWidth: '1144px', margin: '0 auto 50px'}}>
-            <Map cityOffers={offers} selectedOffer={offerItem} type="offer"/>
+            <Map cityOffers={offersNearbyWithCurrent} selectedOffer={offer} type="offer"/>
           </section>
         </section>
         <div className="container">
-          <NearPlaces offers={offers} />
+          <NearPlaces offers={offersNearby}/>
         </div>
       </main>
     </div>
   );
 }
-
 export default Property;
