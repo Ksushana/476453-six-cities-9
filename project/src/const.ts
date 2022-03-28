@@ -43,3 +43,8 @@ export enum HTTP_CODE {
   NOT_FOUND = 404,
 }
 
+export const FAVORITE_STATUS = {
+  isFavorite: 1,
+  isNotFavorite: 0,
+};
+

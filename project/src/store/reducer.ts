@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser, setRoomOffers, setRoomComments, fetchOfferById } from './action';
+import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser, setRoomOffers, setRoomComments, fetchOfferById, setFavorites, removeOffer } from './action';
 import { AppState } from '../types/state';
 import { AuthorizationStatus } from '../const';
 
@@ -10,10 +10,11 @@ const initialState: AppState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   error: '',
   isDataLoaded: false,
-  user: 'eee',
+  user: '',
   offersNearby: [],
   comments: [],
   offer: null,
+  favorites: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -48,6 +49,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setRoomComments, (state, action) => {
       state.comments = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(setFavorites, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(removeOffer, (state, action) => {
+      // state.filter((offer) => offer.id !== action.payload.id);
     });
 });
 

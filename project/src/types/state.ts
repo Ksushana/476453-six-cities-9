@@ -17,7 +17,8 @@ export type AppState = {
   user: string,
   offersNearby: Offers,
   comments: Comments;
-  offer: Offer | null
+  offer: Offer | null,
+  favorites: Offers;
 }
 
 export type UserType = {

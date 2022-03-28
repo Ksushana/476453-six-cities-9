@@ -1,4 +1,3 @@
-// import {useState} from 'react';
 import Header from '../../components/header/header';
 import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
 import MainPageOffers from '../../components/main-with-offers/main-with-offers';

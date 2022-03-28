@@ -1,4 +1,8 @@
 import {Link} from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/useState';
+import { redirectToRoute } from '../../store/action';
+import { toggleOfferStatusAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
 
 type CardProps = {
@@ -24,6 +28,20 @@ function PlaceCard({id, offer, onSelected, cardLook, imageLook, infoLook, price,
     onSelected(offer);
   } ;
 
+  const dispatch = useAppDispatch();
+  const {authorizationStatus} = useAppSelector((state) => state);
+  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+
+  function toggleStatus() {
+    if (!isAuthorized) {
+      dispatch(redirectToRoute(AppRoute.Login));
+    } else {
+      const newStatus = addedToFavorite;
+      dispatch(toggleOfferStatusAction(id, newStatus));
+    }
+  }
+
+
   return (
     <article data-id={id} onMouseEnter={onMouseEnter} className={`place-card ${cardLook} `}>
       {premium ? <div className="place-card__mark"><span>Premium</span></div> : ''}
@@ -38,7 +56,7 @@ function PlaceCard({id, offer, onSelected, cardLook, imageLook, infoLook, price,
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${addedToFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
+          <button onClick={toggleStatus} className={`place-card__bookmark-button button ${addedToFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

@@ -5,10 +5,10 @@ import {useNavigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/useState';
 
 function UserNavigation(): JSX.Element {
-  const email = useAppSelector((state) => state.user);
+  // const email = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const {authorizationStatus, user} = useAppSelector((state) => state);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
   return (
     <div>
@@ -19,7 +19,7 @@ function UserNavigation(): JSX.Element {
               <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                 <div className="header__avatar-wrapper user__avatar-wrapper">
                 </div>
-                <span className="header__user-name user__name">{email}</span>
+                <span className="header__user-name user__name">{user}</span>
               </Link>
             </li>
             <li className="header__nav-item">

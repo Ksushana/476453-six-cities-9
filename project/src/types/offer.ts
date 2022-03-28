@@ -54,6 +54,16 @@ export type AddComment = {
   commentData: CommentData;
 }
 
+export type LocationsDataType = {
+  cityName: string,
+  offers: Offer[],
+}
+
+export type ToggleFavoriteStatus = {
+  hotelID: number;
+  status: number;
+}
+
 export type OffersSortingType = 'none' | 'byPriceUp' | 'byPriceDown' | 'byRatingDown';
 
 export type Offers = Offer[];

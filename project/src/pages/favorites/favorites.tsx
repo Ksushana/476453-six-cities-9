@@ -1,50 +1,24 @@
-import {Link} from 'react-router-dom';
-// import List from '../../components/list/list';
+
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-// import { useAppSelector } from '../../hooks/useState';
-// import {Offer} from '../../types/offer';
-
+import FavoriteCitiesList from '../../components/favotite-cities-list/favorite-cities-list';
+import { useAppSelector } from '../../hooks/useState';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
 function Favorites(): JSX.Element {
-  // const { offers } = useAppSelector((state) => state);
+  const { favorites } = useAppSelector((state) => state);
   return (
     <div className="page">
       <Header />
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <Link to='/' className="locations__item-link">
-                      <span>Amsterdam</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {/* <List offers={offers} lookView={'favorites__card'} imageView={'favorites__image-wrapper'} infoView={'favorites__card-info'} imageWidth={150} imageHeight={110}/> */}
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <Link to='/' className="locations__item-link">
-                      <span>Cologne</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {/* <List offers={offers} lookView={'favorites__card'} imageView={'favorites__image-wrapper'} infoView={'favorites__card-info'} imageWidth={150} imageHeight={110}/> */}
-                </div>
-              </li>
-            </ul>
-          </section>
-        </div>
-      </main>
+      {favorites.length > 0 ?
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <section className="favorites">
+              <FavoriteCitiesList offers={favorites} />
+            </section>
+          </div>
+        </main> :
+        <FavoritesEmpty />}
       <Footer />
     </div>
   );

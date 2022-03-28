@@ -21,3 +21,9 @@ export const fetchOfferById = createAction<Offer>('offer/fetchOfferById');
 export const setRoomOffers = createAction<Offers>('offer/setRoomOffers');
 
 export const setRoomComments = createAction<Comments>('offer/setRoomComments');
+
+export const setFavorites = createAction<Offers>('favorites/setFavorites');
+
+export const removeOffer = createAction<Offer>('favorites/removeOffer');
+
+export const toggleStatus = createAction<Offer>('favorites/toggleStatus');

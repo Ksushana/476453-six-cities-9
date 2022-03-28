@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute } from './action';
+import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute, setFavorites, setUser } from './action';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import { AddComment, Comments, Offer, Offers } from '../types/offer';
@@ -40,6 +40,7 @@ export const loginAction = createAsyncThunk(
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Root));
+      store.dispatch(setUser(email));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -116,6 +117,35 @@ export const addCommentAction = createAsyncThunk(
       const {comment, rating} = commentData;
       const {data} = await api.post<Comments>(`${APIRoute.Comments}/${hotelID}`, {comment, rating});
       store.dispatch(setRoomComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchFavoritesAction = createAsyncThunk(
+  'favorites/setFavorites',
+  async () => {
+    try {
+      const {data} = await api.get<Offers>(`${APIRoute.Favorites}`);
+      store.dispatch(setFavorites(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const toggleOfferStatusAction = (hotelID: number, addedToFavorite: boolean) => createAsyncThunk(
+  'favorites/toggleStatus',
+  async () => {
+    const status = addedToFavorite ? 1 : 0;
+    // eslint-disable-next-line no-console
+    console.log('aaa');
+    try {
+      const {data} = await api.post(`${APIRoute.Favorites}/${hotelID}/${status}`);
+      // eslint-disable-next-line no-console
+      console.log(data);
+      store.dispatch(setFavorites(data));
     } catch (error) {
       errorHandle(error);
     }

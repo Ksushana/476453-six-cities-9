@@ -11,9 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchOffersAction());
-// const email = useAppSelector((state) => state.user);
-// // eslint-disable-next-line no-console
-// console.log(email);
 
 
 ReactDOM.render(

@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import Header from '../../components/header/header';
 import {useRef, FormEvent} from 'react';
 import {loginAction} from '../../store/api-actions';
@@ -80,7 +80,7 @@ function Login(): JSX.Element {
             </div>
           </main>
         </div> :
-        navigate(AppRoute.Root)};
+        <Navigate to={AppRoute.Root} />};
     </div>
   );
 }
