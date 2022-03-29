@@ -41,7 +41,7 @@ export type Offer = {
   price: number,
   rating: number,
   title: string,
-  type: string
+  type: string,
 };
 
 export type CommentData = {

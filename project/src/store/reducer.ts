@@ -15,6 +15,7 @@ const initialState: AppState = {
   comments: [],
   offer: null,
   favorites: [],
+  isCurrentOfferLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -40,7 +41,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchOfferById, (state, action) => {
       state.offer = action.payload;
-      state.isDataLoaded = true;
+      state.isCurrentOfferLoaded = true;
     })
     .addCase(setRoomOffers, (state, action) => {
       state.offersNearby = action.payload;

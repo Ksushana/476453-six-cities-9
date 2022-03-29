@@ -19,6 +19,7 @@ export type AppState = {
   comments: Comments;
   offer: Offer | null,
   favorites: Offers;
+  isCurrentOfferLoaded: boolean
 }
 
 export type UserType = {

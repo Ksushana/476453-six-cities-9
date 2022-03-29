@@ -15,16 +15,25 @@ import { useEffect } from 'react';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Property(): JSX.Element {
-  const { offersNearby, offer } = useAppSelector((state) => state);
+  const { offersNearby, offer, isCurrentOfferLoaded } = useAppSelector((state) => state);
   const URLid = useParams().id || '';
+
+  // const currentId = Number(URLid);
 
   useEffect(( )=> {
     store.dispatch(fetchOfferByIdAction(URLid));
     store.dispatch(fetchCommentsAction(URLid));
     store.dispatch(fetchNearbyOffersAction(URLid));
   }, [URLid]);
+
+  if (!isCurrentOfferLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   if (!offer) {
     return (<NotFound />);
