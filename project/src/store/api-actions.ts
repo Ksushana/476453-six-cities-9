@@ -4,7 +4,7 @@ import {store} from '../store';
 import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute, setFavorites, setUser } from './action';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
-import { AddComment, Comments, Offer, Offers } from '../types/offer';
+import { AddComment, Comments, Offer, Offers, ToggleFavoriteStatus } from '../types/offer';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
@@ -135,20 +135,14 @@ export const fetchFavoritesAction = createAsyncThunk(
   },
 );
 
-export const toggleOfferStatusAction = (hotelID: number, addedToFavorite: boolean) => createAsyncThunk(
-  'favorites/toggleStatus',
-  async () => {
-    const status = addedToFavorite ? 1 : 0;
-    // eslint-disable-next-line no-console
-    console.log('aaa');
+export const toggleFavoriteAction = createAsyncThunk(
+  'data/toggleFavorite',
+  async ({ hotelID, status }: ToggleFavoriteStatus) => {
     try {
-      const {data} = await api.post(`${APIRoute.Favorites}/${hotelID}/${status}`);
-      // eslint-disable-next-line no-console
-      console.log(data);
-      store.dispatch(setFavorites(data));
+      await api.post<Offer[]>(`${APIRoute.Favorites}/${hotelID}/${status}`);
+      store.dispatch(fetchFavoritesAction());
     } catch (error) {
       errorHandle(error);
     }
   },
 );
-

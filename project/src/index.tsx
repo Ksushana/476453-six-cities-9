@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import App from './components/app/app';
 import {store} from './store';
-import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import {checkAuthAction, fetchOffersAction} from './store/api-actions';
 
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

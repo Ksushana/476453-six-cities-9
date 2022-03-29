@@ -5,11 +5,11 @@ import {useNavigate} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/useState';
 
 function UserNavigation(): JSX.Element {
-  // const email = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {authorizationStatus, user} = useAppSelector((state) => state);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+
   return (
     <div>
       {isAuthorized ?

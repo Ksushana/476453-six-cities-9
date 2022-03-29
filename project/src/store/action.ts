@@ -24,6 +24,4 @@ export const setRoomComments = createAction<Comments>('offer/setRoomComments');
 
 export const setFavorites = createAction<Offers>('favorites/setFavorites');
 
-export const removeOffer = createAction<Offer>('favorites/removeOffer');
-
-export const toggleStatus = createAction<Offer>('favorites/toggleStatus');
+export const updateOffer = createAction<Offer>('favorites/updateOffer');

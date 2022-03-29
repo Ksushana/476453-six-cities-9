@@ -20,6 +20,8 @@ function Login(): JSX.Element {
     dispatch(loginAction(authData));
   };
 
+  const { city } = useAppSelector((state) => state);
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
@@ -72,8 +74,8 @@ function Login(): JSX.Element {
               </section>
               <section className="locations locations--login locations--current">
                 <div className="locations__item">
-                  <Link to='/' className="locations__item-link">
-                    <span>Amsterdam</span>
+                  <Link to={AppRoute.Root} className="locations__item-link">
+                    <span>{city}</span>
                   </Link>
                 </div>
               </section>
