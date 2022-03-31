@@ -31,6 +31,7 @@ function Login(): JSX.Element {
         password: passwordRef.current.value,
       });
       dispatch(setUser(loginRef.current.value));
+      localStorage.setItem('login', loginRef.current.value);
       navigate(AppRoute.Root);
     }
   };

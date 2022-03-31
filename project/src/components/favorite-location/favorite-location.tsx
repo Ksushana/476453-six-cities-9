@@ -13,7 +13,7 @@ function FavoriteLocation(props: { locationData: LocationsDataType }) {
           </a>
         </div>
       </div>
-      <FavoriteList offers={offers} lookView={''} imageView={''} onSelected={function (offer: Offer): void {
+      <FavoriteList offers={offers} lookView={'favorites__card'} imageView={'favorites__image-wrapper'} imageHeight={110} imageWidth={150} infoView={'favorites__card-info'} onSelected={function (offer: Offer): void {
         throw new Error('Function not implemented.');
       } }
       />

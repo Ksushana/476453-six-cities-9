@@ -48,3 +48,6 @@ export const FAVORITE_STATUS = {
   isNotFavorite: 0,
 };
 
+export enum UserData {
+  login = '',
+}

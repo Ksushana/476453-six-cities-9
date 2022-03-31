@@ -7,8 +7,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useState';
 function UserNavigation(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {authorizationStatus, user} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector((state) => state);
   const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+
+  const user = localStorage.getItem('login');
 
   return (
     <div>

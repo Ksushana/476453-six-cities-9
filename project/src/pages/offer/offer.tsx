@@ -10,30 +10,21 @@ import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks/useState';
-import NotFound from '../../components/404/404';
 import { useEffect } from 'react';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+import NotFound from '../../components/404/404';
 
 function Property(): JSX.Element {
-  const { offersNearby, offer, isCurrentOfferLoaded } = useAppSelector((state) => state);
+  const { offersNearby, offer } = useAppSelector((state) => state);
   const URLid = useParams().id || '';
-
-  // const currentId = Number(URLid);
 
   useEffect(( )=> {
     store.dispatch(fetchOfferByIdAction(URLid));
     store.dispatch(fetchCommentsAction(URLid));
     store.dispatch(fetchNearbyOffersAction(URLid));
   }, [URLid]);
-
-  if (!isCurrentOfferLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   if (!offer) {
     return (<NotFound />);

@@ -1,5 +1,5 @@
 import { Offer, Offers } from '../../types/offer';
-import FavoriteCity from '../favorite-city/favorite-city';
+import FavoriteLocation from '../favorite-location/favorite-location';
 
 type OffersProps = { offers: Offer[] };
 
@@ -19,7 +19,7 @@ function FavoriteCitiesList(props: OffersProps) {
     <><h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {locationsData.map((location) => (
-          <FavoriteCity key={location.cityName} locationData={location} />
+          <FavoriteLocation key={location.cityName} locationData={location} />
         ))}
       </ul>
     </>

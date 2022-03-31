@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import Header from '../../components/header/header';
 
-function Property(): JSX.Element {
+function NotFound(): JSX.Element {
   return (
     <div className='page'>
       <Header />
@@ -17,4 +17,4 @@ function Property(): JSX.Element {
   );
 }
 
-export default Property;
+export default NotFound;
