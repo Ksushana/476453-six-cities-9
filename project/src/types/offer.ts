@@ -60,7 +60,7 @@ export type LocationsDataType = {
 }
 
 export type ToggleFavoriteStatus = {
-  hotelID: number;
+  id: number;
   status: number;
 }
 

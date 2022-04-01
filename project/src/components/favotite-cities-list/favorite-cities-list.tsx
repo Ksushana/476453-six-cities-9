@@ -5,13 +5,13 @@ type OffersProps = { offers: Offer[] };
 
 function FavoriteCitiesList(props: OffersProps) {
   const { offers } = props;
-  const sortedOffers = offers.reduce((acc: { [cityName: string]: Offers}, offer: Offer) => {
+  const sortedOffers = offers.reduce((fav: { [cityName: string]: Offers}, offer: Offer) => {
     const cityName = offer.city.name;
-    if (!acc[cityName]) {
-      acc[cityName] = [];
+    if (!fav[cityName]) {
+      fav[cityName] = [];
     }
-    acc[cityName].push(offer);
-    return acc;
+    fav[cityName].push(offer);
+    return fav;
   }, {});
   const locationsData = Object.keys(sortedOffers).sort()
     .map((cityName: string) => ({ cityName, offers: sortedOffers[cityName]}));

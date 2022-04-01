@@ -137,9 +137,9 @@ export const fetchFavoritesAction = createAsyncThunk(
 
 export const toggleFavoriteAction = createAsyncThunk(
   'data/toggleFavorite',
-  async ({ hotelID, status }: ToggleFavoriteStatus) => {
+  async ({ id, status }: ToggleFavoriteStatus) => {
     try {
-      await api.post<Offer[]>(`${APIRoute.Favorites}/${hotelID}/${status}`);
+      await api.post<Offers>(`${APIRoute.Favorites}/${id}/${status}`);
       store.dispatch(fetchFavoritesAction());
     } catch (error) {
       errorHandle(error);

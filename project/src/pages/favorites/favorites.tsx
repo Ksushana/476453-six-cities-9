@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks/useState';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
 function Favorites(): JSX.Element {
-  const { favorites } = useAppSelector((state) => state);
+  const favorites = useAppSelector((state) => state.favorites);
   return (
     <div className="page">
       <Header />
