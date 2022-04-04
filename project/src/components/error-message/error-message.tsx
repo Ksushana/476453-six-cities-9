@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/useState';
+import { useAppSelector } from '../../hooks/useSelector';
 
 function ErrorMessage(): JSX.Element | null {
   const {error} = useAppSelector((state) => state);

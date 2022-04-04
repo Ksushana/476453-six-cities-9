@@ -9,24 +9,35 @@ import Price from '../../components/property/price/price';
 import Rating from '../../components/property/rating/rating';
 import Reviews from '../../components/property/reviews/reviews';
 import Map from '../../components/map/map';
-import { useAppSelector } from '../../hooks/useState';
+import { useAppSelector } from '../../hooks/useSelector';
 import { useEffect } from 'react';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearbyOffersAction, fetchOfferByIdAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import NotFound from '../../components/404/404';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import NotFound from '../../components/not-found/not-found';
+import { clearOffer, setRoomComments, setRoomOffers } from '../../store/action';
 
 function Property(): JSX.Element {
-  const { offersNearby, offer } = useAppSelector((state) => state);
-  const URLid = useParams().id || '';
+  const { offersNearby, offer, isCurrentOfferLoaded } = useAppSelector((state) => state);
+  const {id = ''} = useParams();
 
   useEffect(( )=> {
-    store.dispatch(fetchOfferByIdAction(URLid));
-    store.dispatch(fetchCommentsAction(URLid));
-    store.dispatch(fetchNearbyOffersAction(URLid));
-  }, [URLid]);
+    store.dispatch(fetchOfferByIdAction(id));
+    store.dispatch(fetchCommentsAction(id));
+    store.dispatch(fetchNearbyOffersAction(id));
+    return () => {
+      store.dispatch(clearOffer(null));
+      store.dispatch(setRoomOffers([]));
+      store.dispatch(setRoomComments([]));
+    };
+  }, [id]);
 
-  if (!offer) {
+  if (!isCurrentOfferLoaded) {
+    return (<LoadingScreen />);
+  }
+
+  if(!offer) {
     return (<NotFound />);
   }
 
@@ -34,11 +45,11 @@ function Property(): JSX.Element {
 
   return (
     <div className="page">
-      <Header />
+      <Header/>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <Gallery  offer={offer}/>
+            <Gallery offer={offer}/>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -46,8 +57,8 @@ function Property(): JSX.Element {
               <Name offer={offer}/>
               <Rating offer={offer}/>
               <Features offer={offer}/>
-              <Price  offer={offer}/>
-              <Inside  offer={offer}/>
+              <Price offer={offer}/>
+              <Inside offer={offer}/>
               <Host offer={offer}/>
               <Reviews hotelID={offer.id}/>
             </div>

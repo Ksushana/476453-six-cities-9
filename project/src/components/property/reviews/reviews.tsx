@@ -1,6 +1,6 @@
 import ReviewForm from '../review-form/review-form';
 import ReviewList from '../review-list/review-list';
-import { useAppSelector } from '../../../hooks/useState';
+import { useAppSelector } from '../../../hooks/useSelector';
 import { AuthorizationStatus } from '../../../const';
 
 type ReviewFormProps = {

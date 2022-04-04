@@ -3,9 +3,10 @@ import Logo from './../logo/logo';
 
 type HeaderProps = {
   hideNavigation?: boolean;
+  isOfferLoaded?: boolean;
 }
 
-function Header({hideNavigation = false} :HeaderProps = {}): JSX.Element {
+function Header({hideNavigation = false, isOfferLoaded = false} :HeaderProps = {}): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -13,7 +14,7 @@ function Header({hideNavigation = false} :HeaderProps = {}): JSX.Element {
           <div className="header__left">
             <Logo width={81} height={61}/>
           </div>
-          {!hideNavigation && <UserNavigation/> }
+          {!hideNavigation && <UserNavigation/>}
         </div>
       </div>
     </header>

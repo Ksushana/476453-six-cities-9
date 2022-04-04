@@ -1,7 +1,8 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/useState';
+import { useAppDispatch } from '../../hooks/useDispatch';
 import { setCity } from '../../store/action';
 import { mainLocations } from '../../const';
 import {Link} from 'react-router-dom';
+import { useAppSelector } from '../../hooks/useSelector';
 
 function Locations(): JSX.Element {
   const { city } = useAppSelector((state) => state);

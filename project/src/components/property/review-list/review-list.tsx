@@ -1,11 +1,5 @@
 import ReviewItem from '../review/review';
-// import {Review} from '../../../types/review';
-import { useAppSelector } from '../../../hooks/useState';
-
-
-// type ReviewsProps = {
-//   reviews: Review[],
-// };
+import { useAppSelector } from '../../../hooks/useSelector';
 
 function ReviewList() :JSX.Element {
   const { comments } = useAppSelector((state) => state);

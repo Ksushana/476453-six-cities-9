@@ -68,4 +68,3 @@ export type OffersSortingType = 'none' | 'byPriceUp' | 'byPriceDown' | 'byRating
 
 export type Offers = Offer[];
 export type Comments = Comment[];
-export type CommentFormDataType = { rating: number | null, comment: string };

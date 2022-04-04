@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom';
 import { AppRoute, AuthorizationStatus} from './../../const';
 import { logoutAction } from '../../store/api-actions';
-import {useNavigate} from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/useState';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/useSelector';
+import { useAppDispatch } from '../../hooks/useDispatch';
 
 function UserNavigation(): JSX.Element {
   const navigate = useNavigate();

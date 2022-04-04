@@ -1,5 +1,5 @@
 import {ChangeEvent, FormEvent, useRef, useState} from 'react';
-import { useAppDispatch } from '../../../hooks/useState';
+import { useAppDispatch } from '../../../hooks/useDispatch';
 import { addCommentAction } from '../../../store/api-actions';
 import { AddComment } from '../../../types/offer';
 import ReviewFormRating from '../review-form-rating/review-form-rating';

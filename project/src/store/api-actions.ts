@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {api} from '../store';
 import {store} from '../store';
-import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute, setFavorites, setUser } from './action';
+import { requireAuthorization, setOffers, setError, setRoomComments, setRoomOffers, fetchOfferById, redirectToRoute, setFavorites, setUser, clearOffer } from './action';
 import {errorHandle} from '../services/error-handle';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import { AddComment, Comments, Offer, Offers, ToggleFavoriteStatus } from '../types/offer';
@@ -14,6 +14,16 @@ export const clearErrorAction = createAsyncThunk(
   () => {
     setTimeout(
       () => store.dispatch(setError('')),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
+
+export const clearOfferAction = createAsyncThunk(
+  'offer/clearOffer',
+  () => {
+    setTimeout(
+      () => store.dispatch(clearOffer(null)),
       TIMEOUT_SHOW_ERROR,
     );
   },
@@ -55,6 +65,7 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(setFavorites([]));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -82,6 +93,7 @@ export const fetchOfferByIdAction = createAsyncThunk(
       store.dispatch(fetchOfferById(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.NotFound));
     }
   },
 );
@@ -146,3 +158,4 @@ export const toggleFavoriteAction = createAsyncThunk(
     }
   },
 );
+

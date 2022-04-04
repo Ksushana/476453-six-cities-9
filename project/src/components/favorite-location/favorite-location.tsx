@@ -2,8 +2,8 @@
 import { LocationsDataType, Offer } from '../../types/offer';
 import FavoriteList from '../favorite-list/favorite-list';
 import { setCity } from '../../store/action';
-import { useAppDispatch } from '../../hooks/useState';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/useDispatch';
 
 function FavoriteLocation(props: { locationData: LocationsDataType }) {
   const dispatch = useAppDispatch();

@@ -2,7 +2,7 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import FavoriteCitiesList from '../../components/favotite-cities-list/favorite-cities-list';
-import { useAppSelector } from '../../hooks/useState';
+import { useAppSelector } from '../../hooks/useSelector';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 
 function Favorites(): JSX.Element {

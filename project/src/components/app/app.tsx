@@ -5,10 +5,10 @@ import Main from '../../pages/main-page/main-page';
 import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 import OfferCard from '../../pages/offer/offer';
-import NotFound from '../404/404';
+import NotFound from '../not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { useAppSelector } from '../../hooks/useState';
+import { useAppSelector } from '../../hooks/useSelector';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-router/history-router';
 

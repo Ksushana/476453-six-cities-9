@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser, setRoomOffers, setRoomComments, fetchOfferById, setFavorites } from './action';
+import { setCity, setOffers, setCurrentOffer, requireAuthorization, setError, setUser, setRoomOffers, setRoomComments, fetchOfferById, setFavorites, clearOffer } from './action';
 import { AppState } from '../types/state';
 import { AuthorizationStatus } from '../const';
 
@@ -50,6 +50,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setRoomComments, (state, action) => {
       state.comments = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(clearOffer, (state) => {
+      state.offer = null;
+      state.isCurrentOfferLoaded = false;
     })
     .addCase(setFavorites, (state, action) => {
       state.favorites = action.payload;

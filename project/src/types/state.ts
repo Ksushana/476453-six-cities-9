@@ -2,11 +2,6 @@ import {Comments, Offer, Offers } from './offer';
 import {store} from '../store';
 import {AuthorizationStatus} from '../const';
 
-export type AuthDataType = {
-  email: FormDataEntryValue | null,
-  password: FormDataEntryValue | null,
-}
-
 export type AppState = {
   city: string,
   offers: Offers,

@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
 import MainPageOffers from '../../components/main-with-offers/main-with-offers';
 import Locations from '../../components/locations/locations';
-import { useAppSelector } from '../../hooks/useState';
+import { useAppSelector } from '../../hooks/useSelector';
 
 function Main(): JSX.Element {
   const { offers, city } = useAppSelector((state) => state);

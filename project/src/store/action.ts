@@ -25,3 +25,5 @@ export const setRoomComments = createAction<Comments>('offer/setRoomComments');
 export const setFavorites = createAction<Offers>('favorites/setFavorites');
 
 export const updateOffer = createAction<Offer>('favorites/updateOffer');
+
+export const clearOffer = createAction<null>('offer/clearOffer');
