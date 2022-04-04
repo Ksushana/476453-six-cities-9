@@ -6,14 +6,11 @@ type OfferPageProps = {
 }
 
 function NearPlaces({offers}: OfferPageProps) :JSX.Element {
-  function setChosenOffer ( ) {
-    // const offersLength = offers.length;
-  }
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        <PlacesList offers={offers.slice(0, 3)} lookView={'near-places__card'} imageView={'near-places__image-wrapper'}  onSelected={setChosenOffer}/>
+        <PlacesList offers={offers.slice(0, 3)} lookView={'near-places__card'} imageView={'near-places__image-wrapper'}/>
       </div>
     </section>
   );

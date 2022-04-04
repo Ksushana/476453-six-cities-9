@@ -12,12 +12,9 @@ type FavoritePlacesToStayProps = {
 };
 
 function FavoriteList({offers, lookView, imageView, infoView, imageWidth, imageHeight, onSelected}: FavoritePlacesToStayProps) {
-  const handlePlaceSelected = (offer: Offer) => {
-    // onSelected(offer);
-  };
   return (
     <div className="favorites__places">
-      {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} id={offer.id} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.isPremium} image={offer.previewImage} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth} onSelected={handlePlaceSelected} addedToFavorite={false}/>)}
+      {offers.map((offer) => <PlaceCard key={offer.id} offer={offer} id={offer.id} price={offer.price} name={offer.title} rating={offer.rating} type={offer.type} premium={offer.isPremium} image={offer.previewImage} imageLook={imageView} cardLook={lookView} infoLook={infoView} imageHeight={imageHeight} imageWidth={imageWidth}  addedToFavorite={false}/>)}
     </div>
   );
 }

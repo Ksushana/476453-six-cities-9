@@ -17,12 +17,14 @@ type CardProps = {
   addedToFavorite : boolean,
   imageWidth?: number,
   imageHeight?: number,
-  onSelected: (offer: Offer) => void,
+  onSelected?: (offer: Offer) => void,
 }
 
 function PlaceCard({id, offer, onSelected, cardLook, imageLook, infoLook, price, name, rating, type, premium, image,addedToFavorite = false,imageWidth= 260, imageHeight=200}: CardProps ): JSX.Element {
   const onMouseEnter = () => {
-    onSelected(offer);
+    if(onSelected) {
+      onSelected(offer);
+    }
   } ;
 
   const { changeFavoriteFlagStatus, isCardInFavoriteCollection } = useFavoriteCardState(offer);

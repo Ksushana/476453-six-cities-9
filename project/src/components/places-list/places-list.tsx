@@ -8,12 +8,14 @@ type PlacesToStayProps = {
   infoView?: string;
   imageWidth?: number;
   imageHeight?: number;
-  onSelected: (offer: Offer) => void,
+  onSelected?: (offer: Offer) => void,
 };
 
 function PlacesList({offers, lookView, imageView, infoView, imageWidth, imageHeight, onSelected}: PlacesToStayProps): JSX.Element {
   const handlePlaceSelected = (offer: Offer) => {
-    onSelected(offer);
+    if(onSelected) {
+      onSelected(offer);
+    }
   };
 
   return (
